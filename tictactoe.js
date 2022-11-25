@@ -1,5 +1,9 @@
 // HTML ELEMENTS
 const squares = document.querySelectorAll('button');
+const message = document.querySelector('#winnerMessage');
+
+
+// Variables
 
 let xTurn = true;
 let marked = false;
@@ -70,7 +74,7 @@ function checkForWin(){
     winner = boardTracker["a3"];
   }
   if (winner != ""){
-    console.log(winner + " HAS WON");
+    message.textContent = "winner is " + winner;
   }
   
 }
