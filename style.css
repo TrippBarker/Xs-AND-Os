@@ -1,14 +1,77 @@
-#gameboard{
-    background-color: black;
-    grid-area: gameboard;
-    display: grid;
-    grid-template-areas: 
-        'a1 a2 a3'
-        'b1 b2 b3'
-        'c1 c2 c3'
-        ;
+button{
+  all: unset;
 }
 
 .square{
-    background-color: green;
+  background-color: white;
+  height: 95%;
+  width: 95%;
+}
+
+.right{
+  margin-left: auto;
+}
+
+.bottom{
+  margin-top: auto;
+}
+
+.midcol{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.midrow{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#gameboard{
+  background-color: black;
+  margin: auto;
+  height: 300px;
+  width: 300px;
+  grid-area: gameboard;
+  display: grid;
+  grid-template-areas: 
+    'a1 a2 a3'
+    'b1 b2 b3'
+    'c1 c2 c3'
+    ;
+}
+
+#a1{
+  grid-area: a1;
+}
+
+#a2{
+  grid-area: a2;
+}
+
+#a3{
+  grid-area: a3;
+}
+
+#b1{
+  grid-area: b1;
+}
+
+#b2{
+  grid-area: b2;
+}
+
+#b3{
+  grid-area: b3;
+}
+
+#c1{
+  grid-area: c1;
+}
+
+#c2{
+  grid-area: c2;
+}
+
+#c3{
+  grid-area: c3;
 }
