@@ -27,7 +27,6 @@ let boardTracker = {
 
 
 function squareState(key){
-  
   let mark = "x";
   if (!xTurn){
     mark = "o";
@@ -51,32 +50,27 @@ function canClick(){
   }
 }
 
-function checkSquareState(){
-  console.log(this);  
-}
-
 function checkForWin(){
-  if (boardTracker["a2"] == boardTracker["a1"] && boardTracker["a3"] == boardTracker["a1"]){
+  if (boardTracker["a2"] == boardTracker["a1"] && boardTracker["a3"] == boardTracker["a1"] && boardTracker["a1"] != ""){
     winner = boardTracker["a1"];
-  } else if (boardTracker["b2"] == boardTracker["b1"]  && boardTracker["b3"] == boardTracker["b1"]){
+  } else if (boardTracker["b2"] == boardTracker["b1"] && boardTracker["b3"] == boardTracker["b1"] && boardTracker["b1"] != ""){
     winner = boardTracker["b1"];
-  } else if (boardTracker["c2"] == boardTracker["c1"] && boardTracker["c3"] == boardTracker["c1"]){
+  } else if (boardTracker["c2"] == boardTracker["c1"] && boardTracker["c3"] == boardTracker["c1"] && boardTracker["c1"] != ""){
     winner = boardTracker["c1"];
-  } else if (boardTracker["c1"]== boardTracker["a1"] && boardTracker["b1"] == boardTracker["a1"]){
+  } else if (boardTracker["c1"]== boardTracker["a1"] && boardTracker["b1"] == boardTracker["a1"] && boardTracker["a1"] != ""){
     winner = boardTracker["a1"];
-  } else if (boardTracker["c2"] == boardTracker["a2"] && boardTracker["b2"] == boardTracker["a2"]){
+  } else if (boardTracker["c2"] == boardTracker["a2"] && boardTracker["b2"] == boardTracker["a2"] && boardTracker["a2"] != ""){
     winner = boardTracker["a2"];
-  } else if (boardTracker["c3"] == boardTracker["a3"] && boardTracker["b3"] == boardTracker["a3"]){
+  } else if (boardTracker["c3"] == boardTracker["a3"] && boardTracker["b3"] == boardTracker["a3"] && boardTracker["a3"] != ""){
     winner = boardTracker["a3"];
-  } else if (boardTracker["b2"] == boardTracker["a1"] && boardTracker["c3"] == boardTracker["a1"]){
+  } else if (boardTracker["b2"] == boardTracker["a1"] && boardTracker["c3"] == boardTracker["a1"] && boardTracker["a1"] != ""){
     winner = boardTracker["a1"];
-  } else if (boardTracker["b2"] == boardTracker["a3"] && boardTracker["c1"] == boardTracker["a3"]){
+  } else if (boardTracker["b2"] == boardTracker["a3"] && boardTracker["c1"] == boardTracker["a3"] && boardTracker["a3"] != ""){
     winner = boardTracker["a3"];
   }
   if (winner != ""){
     message.textContent = "winner is " + winner;
   }
-  
 }
 
 // EVENT LISTENERS
