@@ -8,6 +8,9 @@ const message = document.querySelector('#winnerMessage');
 let xTurn = true;
 let winner = "";
 let counter = 0;
+let selectedSquare = "";
+
+let availableSquares = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"];
 
 let boardTracker = {
   a1: "",
@@ -24,10 +27,19 @@ let boardTracker = {
 
 // FUNCTIONS
 
+function userSquareSelection(){
+  selectedSquare = this.id;
+  console.log(selectedSquare);
+  checkIfSquareEmpty();
+  randXMovement();
+}
+
 function checkIfSquareEmpty(){
-  if (boardTracker[this.id] == "" && winner == ""){
+  if (boardTracker[selectedSquare] == "" && winner == ""){
     counter++;
-    drawMove(this);
+    drawMove();
+    availableSquares.splice(availableSquares.indexOf(selectedSquare), 1);
+    console.log(availableSquares);
     if (counter == 9){
       winner = "TIE";
     }
@@ -35,7 +47,7 @@ function checkIfSquareEmpty(){
   }
 }
 
-function drawMove(key){
+function drawMove(){
   let mark = "x";
   if (!xTurn){
     mark = "o";
@@ -43,9 +55,9 @@ function drawMove(key){
   } else {
     xTurn = false;
   }
-  boardTracker[key.id] = mark;
-  key.classList.add("drawXO");
-  key.style.backgroundImage = "url(/resources/"+mark+"s/"+mark+(Math.floor(Math.random() * 10) + 1)+".png)";
+  boardTracker[selectedSquare] = mark;
+  document.getElementById(selectedSquare).classList.add("drawXO");
+  document.getElementById(selectedSquare).style.backgroundImage = "url(/resources/"+mark+"s/"+mark+(Math.floor(Math.random() * 10) + 1)+".png)";
 }
 
 function checkForWin(){
@@ -71,5 +83,11 @@ function checkForWin(){
   }
 }
 
+function randXMovement(){
+  selectedSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
+  checkIfSquareEmpty();
+}
+
 // EVENT LISTENERS
-squares.forEach(button => button.addEventListener('click', checkIfSquareEmpty));
+squares.forEach(button => button.addEventListener('click', userSquareSelection));
+randXMovement();
