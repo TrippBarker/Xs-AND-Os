@@ -6,7 +6,6 @@ const message = document.querySelector('#winnerMessage');
 // Variables
 
 let xTurn = true;
-let marked = false;
 let winner = "";
 let counter = 0;
 
@@ -25,8 +24,18 @@ let boardTracker = {
 
 // FUNCTIONS
 
+function checkIfSquareEmpty(){
+  if (boardTracker[this.id] == "" && winner == ""){
+    counter++;
+    drawMove(this);
+    if (counter == 9){
+      winner = "TIE";
+    }
+    checkForWin();
+  }
+}
 
-function squareState(key){
+function drawMove(key){
   let mark = "x";
   if (!xTurn){
     mark = "o";
@@ -37,17 +46,6 @@ function squareState(key){
   boardTracker[key.id] = mark;
   key.classList.add("drawXO");
   key.style.backgroundImage = "url(/resources/"+mark+"s/"+mark+(Math.floor(Math.random() * 10) + 1)+".png)";
-}
-
-function canClick(){
-  if (boardTracker[this.id] == "" && winner == ""){
-    counter++;
-    squareState(this);
-    if (counter == 9){
-      winner = "TIE";
-    }
-    checkForWin();
-  }
 }
 
 function checkForWin(){
@@ -74,4 +72,4 @@ function checkForWin(){
 }
 
 // EVENT LISTENERS
-squares.forEach(button => button.addEventListener('click', canClick));
+squares.forEach(button => button.addEventListener('click', checkIfSquareEmpty));
