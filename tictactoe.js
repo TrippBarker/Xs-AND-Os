@@ -47,7 +47,7 @@ function drawMove(){
   }
   boardTracker[selectedSquare] = mark;
   document.getElementById(selectedSquare).classList.add("drawXO");
-  document.getElementById(selectedSquare).style.backgroundImage = "url(/resources/"+mark+"s/"+mark+(Math.floor(Math.random() * 10) + 1)+".png)";
+  document.getElementById(selectedSquare).style.backgroundImage = "url(resources/"+mark+"s/"+mark+(Math.floor(Math.random() * 10) + 1)+".png)";
 }
 
 function checkForWin(){
