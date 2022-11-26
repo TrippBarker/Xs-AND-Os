@@ -1,3 +1,10 @@
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
 button{
   all: unset;
 }
@@ -37,6 +44,10 @@ textarea{
 
 #playButton:active, #resetButton:active{
   background-color: red;
+}
+
+#gameCont{
+  margin-top: 5vh;
 }
 
 .square{
@@ -103,4 +114,23 @@ textarea{
 
 .hidden{
   display: none;
+}
+
+#contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+}
+
+.profilelink {
+  padding: 15px 50px;
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+}
+
+.profilelink:hover {
+  transition: .25s;
+  scale: 1.05;
 }

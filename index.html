@@ -20,21 +20,30 @@
       <button id="playButton">PLAY</button>
     </div>
   </section>
-
-  <section id="gameboard">
-    <button id="a1" class="square"></button>
-    <button id="a2" class="midcol square"></button>
-    <button id="a3" class="right square"></button>
-    <button id="b1" class="midrow square"></button>
-    <button id="b2" class="midrow midcol square"></button>
-    <button id="b3" class="midrow right square"></button>
-    <button id="c1" class="bottom square"></button>
-    <button id="c2" class="midcol bottom square"></button>
-    <button id="c3" class="bottom right square"></button>
-  </section>
-  <section id="winnerContainer">
-    <textarea id="winnerMessage" readonly="true" rows="1"></textarea>
-    <button id="resetButton">RESET</button>
+  <div id="gameCont">
+    <section id="gameboard">
+      <button id="a1" class="square"></button>
+      <button id="a2" class="midcol square"></button>
+      <button id="a3" class="right square"></button>
+      <button id="b1" class="midrow square"></button>
+      <button id="b2" class="midrow midcol square"></button>
+      <button id="b3" class="midrow right square"></button>
+      <button id="c1" class="bottom square"></button>
+      <button id="c2" class="midcol bottom square"></button>
+      <button id="c3" class="bottom right square"></button>
+    </section>
+    <section id="winnerContainer">
+      <textarea id="winnerMessage" readonly="true" rows="1"></textarea>
+      <button id="resetButton">RESET</button>
+    </section>
+  </div>
+  
+  <section id="contact">
+    <h2>find us here</h2>
+    <div id="profiles">
+      <a href="https://www.trippbarker.com"><img src="./resources/images/profiles/tripp.jpg" alt="" class="profilelink"></a>
+      <a href="https://alexbarkerwebdev.com"><img src="./resources/images/profiles/alex.jpg" alt="" class="profilelink"></a>
+    </div>
   </section>
   <script src="tictactoe.js"></script>
 </body>
