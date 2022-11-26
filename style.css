@@ -72,42 +72,6 @@ button{
     ;
 }
 
-#a1{
-  grid-area: a1;
-}
-
-#a2{
-  grid-area: a2;
-}
-
-#a3{
-  grid-area: a3;
-}
-
-#b1{
-  grid-area: b1;
-}
-
-#b2{
-  grid-area: b2;
-}
-
-#b3{
-  grid-area: b3;
-}
-
-#c1{
-  grid-area: c1;
-}
-
-#c2{
-  grid-area: c2;
-}
-
-#c3{
-  grid-area: c3;
-}
-
 .drawXO{
   background-size: 70%;
   background-position: center;

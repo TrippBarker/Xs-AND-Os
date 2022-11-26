@@ -12,17 +12,7 @@ let selectedSquare = "";
 
 let availableSquares = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"];
 
-let boardTracker = {
-  a1: "",
-  a2: "",
-  a3: "",
-  b1: "",
-  b2: "",
-  b3: "",
-  c1: "",
-  c2: "",
-  c3: ""
-}
+let boardTracker = {a1: "", a2: "", a3: "", b1: "", b2: "", b3: "", c1: "", c2: "", c3: ""}
 
 
 // FUNCTIONS
@@ -89,11 +79,15 @@ function randXMovement(){
 }
 
 function toggleStartMenu(){
-  console.log("hide");
   document.getElementById("startMenu").classList.toggle("hidden");
 }
 
+function assignGridPos(square){
+  square.style.gridArea = square.id;
+}
+
 // EVENT LISTENERS
+squares.forEach(square => assignGridPos(square));
 squares.forEach(button => button.addEventListener('click', userSquareSelection));
 playButton.addEventListener('click', toggleStartMenu);
 randXMovement();
