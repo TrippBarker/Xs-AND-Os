@@ -2,17 +2,16 @@
 const squares = document.querySelectorAll('.square');
 const message = document.querySelector('#winnerMessage');
 const playButton = document.querySelector('#playButton');
+const resetButton = document.querySelector('#resetButton');
 
 // Variables
 
-let xTurn = true;
-let winner = "";
-let counter = 0;
-let selectedSquare = "";
-
-let availableSquares = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"];
-
-let boardTracker = {a1: "", a2: "", a3: "", b1: "", b2: "", b3: "", c1: "", c2: "", c3: ""}
+let xTurn;
+let winner;
+let counter;
+let selectedSquare;
+let availableSquares;
+let boardTracker;
 
 
 // FUNCTIONS
@@ -80,14 +79,27 @@ function randXMovement(){
 
 function toggleStartMenu(){
   document.getElementById("startMenu").classList.toggle("hidden");
+  newGame();
 }
 
 function assignGridPos(square){
   square.style.gridArea = square.id;
 }
 
+function newGame(){
+  xTurn = true;
+  winner = "";
+  counter = 0;
+  selectedSquare = "";
+  availableSquares = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"];
+  boardTracker = {a1: "", a2: "", a3: "", b1: "", b2: "", b3: "", c1: "", c2: "", c3: ""}
+  squares.forEach(square => square.style.backgroundImage="none");
+  message.textContent = "";
+  randXMovement();
+}
+
 // EVENT LISTENERS
 squares.forEach(square => assignGridPos(square));
 squares.forEach(button => button.addEventListener('click', userSquareSelection));
 playButton.addEventListener('click', toggleStartMenu);
-randXMovement();
+resetButton.addEventListener('click', newGame);
