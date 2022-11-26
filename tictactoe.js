@@ -1,7 +1,7 @@
 // HTML ELEMENTS
-const squares = document.querySelectorAll('button');
+const squares = document.querySelectorAll('.square');
 const message = document.querySelector('#winnerMessage');
-
+const playButton = document.querySelector('#playButton');
 
 // Variables
 
@@ -88,6 +88,12 @@ function randXMovement(){
   checkIfSquareEmpty();
 }
 
+function toggleStartMenu(){
+  console.log("hide");
+  document.getElementById("startMenu").classList.toggle("hidden");
+}
+
 // EVENT LISTENERS
 squares.forEach(button => button.addEventListener('click', userSquareSelection));
+playButton.addEventListener('click', toggleStartMenu);
 randXMovement();
