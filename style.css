@@ -94,6 +94,18 @@ textarea{
   background-repeat: no-repeat;
 }
 
+#scoreBoard{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.score{
+  text-align: center;
+}
+
 #winnerContainer{
   margin-top: 20px;
   display: flex;
