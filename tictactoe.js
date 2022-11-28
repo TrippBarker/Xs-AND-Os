@@ -83,7 +83,7 @@ function randXMovement(){
     }
     for (let key in boardStates[board]){
       if (boardStates[board][key] != boardTracker[key]){
-        if ("1234567890".includes(boardStates[board][key]) && boardTracker[key] == ""){
+        if ((typeof (boardStates[board][key]) == 'number') && boardTracker[key] == ""){
           knownBoard = true;
         } else {
           knownBoard = false;
