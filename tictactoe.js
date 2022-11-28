@@ -73,9 +73,22 @@ function checkForWin(){
 }
 
 function randXMovement(){
-  recordNewBoardState();
   selectedSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
   checkIfSquareEmpty();
+  recordNewBoardState();
+  for (let key in boardStates){
+    console.log(boardStates[key]);
+    for (let secKey in boardStates[key]){
+      if (boardStates[key][secKey] != boardTracker[secKey]){
+        break;
+      }
+      if (secKey == "c3"){
+        console.log("hello");
+      }
+    }
+  }
+  console.log(boardTracker);
+  console.log("-------------");
 }
 
 function recordNewBoardState(){
