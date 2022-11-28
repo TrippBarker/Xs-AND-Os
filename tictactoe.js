@@ -73,6 +73,7 @@ function checkForWin(){
 }
 
 function randXMovement(){
+  
   selectedSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
   checkIfSquareEmpty();
 }
