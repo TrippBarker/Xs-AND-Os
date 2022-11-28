@@ -12,6 +12,7 @@ let selectedSquare;
 let availableSquares;
 let boardTracker;
 let boardStates = new Array();
+let knownBoard = false;
 
 
 // FUNCTIONS
@@ -75,26 +76,41 @@ function checkForWin(){
 function randXMovement(){
   selectedSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
   checkIfSquareEmpty();
-  recordNewBoardState();
-  for (let key in boardStates){
-    console.log(boardStates[key]);
-    for (let secKey in boardStates[key]){
-      if (boardStates[key][secKey] != boardTracker[secKey]){
-        break;
+  for (let board in boardStates){
+    console.log(boardStates[board]);
+    if (knownBoard){
+      break;
+    }
+    for (let key in boardStates[board]){
+      if (boardStates[board][key] != boardTracker[key]){
+        if ("1234567890".includes(boardStates[board][key]) && boardTracker[key] == ""){
+          knownBoard = true;
+        } else {
+          knownBoard = false;
+          break;
+        }
       }
-      if (secKey == "c3"){
-        console.log("hello");
+      if (key == "c3"){
+        knownBoard = true;
       }
     }
   }
+  if (!knownBoard){
+    recordNewBoardState();
+  }
   console.log(boardTracker);
   console.log("-------------");
+  knownBoard = false;
 }
 
 function recordNewBoardState(){
   let boardCopy = {};
   for (let key in boardTracker){
-    boardCopy[key] = boardTracker[key];
+    if (boardTracker[key] == ""){
+      boardCopy[key] = 1;
+    } else {
+      boardCopy[key] = boardTracker[key];
+    }
   }
   boardStates.push(boardCopy);
 }
