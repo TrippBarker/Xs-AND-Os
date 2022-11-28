@@ -73,8 +73,17 @@ function checkForWin(){
 }
 
 function randXMovement(){
+  recordNewBoardState();
   selectedSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
   checkIfSquareEmpty();
+}
+
+function recordNewBoardState(){
+  let boardCopy = {};
+  for (let key in boardTracker){
+    boardCopy[key] = boardTracker[key];
+  }
+  boardStates.push(boardCopy);
 }
 
 function toggleStartMenu(){
