@@ -8,19 +8,20 @@ const resetButton = document.querySelector('#resetButton');
 
 let xTurn;
 let winner;
-let counter;
 let selectedSquare;
 let availableSquares;
 let boardTracker;
+let boardStates = new Array();
 
 
 // FUNCTIONS
 
 function userSquareSelection(){
   selectedSquare = this.id;
-  console.log(selectedSquare);
   checkIfSquareEmpty();
-  randXMovement();
+  if (xTurn){
+    randXMovement();
+  }
 }
 
 function checkIfSquareEmpty(){
@@ -28,7 +29,6 @@ function checkIfSquareEmpty(){
     counter++;
     drawMove();
     availableSquares.splice(availableSquares.indexOf(selectedSquare), 1);
-    console.log(availableSquares);
     if (counter == 9){
       winner = "TIE";
     }
@@ -73,7 +73,6 @@ function checkForWin(){
 }
 
 function randXMovement(){
-  
   selectedSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
   checkIfSquareEmpty();
 }
