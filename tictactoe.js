@@ -73,9 +73,11 @@ function checkForWin(){
   }
 }
 
+// Called to have X make a move
 function randXMovement(){
   selectedSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
   checkIfSquareEmpty();
+  console.log(boardStates.length);
   for (let board in boardStates){
     console.log(boardStates[board]);
     if (knownBoard){
