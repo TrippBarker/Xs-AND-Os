@@ -9,8 +9,10 @@ const resetButton = document.querySelector('#resetButton');
 let xTurn;
 let winner;
 let selectedSquare;
-let availableSquares;
+let availableSquares = [];
+let weightedAvailableSquares = [];
 let boardTracker;
+let currentState;
 let boardStates = new Array();
 let knownBoard = false;
 
@@ -75,11 +77,7 @@ function checkForWin(){
 
 // Called to have X make a move
 function randXMovement(){
-  selectedSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
-  checkIfSquareEmpty();
-  console.log(boardStates.length);
   for (let board in boardStates){
-    console.log(boardStates[board]);
     if (knownBoard){
       break;
     }
@@ -94,14 +92,17 @@ function randXMovement(){
       }
       if (key == "c3"){
         knownBoard = true;
+        currentState = boardStates[board];
       }
     }
   }
   if (!knownBoard){
     recordNewBoardState();
   }
-  console.log(boardTracker);
-  console.log("-------------");
+  console.log(currentState);
+  fetchWeights();
+  selectedSquare = weightedAvailableSquares[Math.floor(Math.random() * weightedAvailableSquares.length)];
+  checkIfSquareEmpty();
   knownBoard = false;
 }
 
@@ -114,6 +115,7 @@ function recordNewBoardState(){
       boardCopy[key] = boardTracker[key];
     }
   }
+  currentState = boardCopy;
   boardStates.push(boardCopy);
 }
 
@@ -124,6 +126,21 @@ function toggleStartMenu(){
 
 function assignGridPos(square){
   square.style.gridArea = square.id;
+}
+
+function fetchWeights(){
+  weightedAvailableSquares = [];
+  console.log("---");
+  console.log(weightedAvailableSquares);
+  console.log("---");
+  for (let key in currentState){
+    if (typeof currentState[key] == 'number'){
+      for (let i = 0; i < currentState[key]; i++){
+        weightedAvailableSquares.push(key);
+      }
+    }
+  }
+  console.log(weightedAvailableSquares);
 }
 
 function newGame(){
