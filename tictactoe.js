@@ -17,6 +17,9 @@ let currentState;
 let boardStates = new Array();
 let boardSequence = {};
 let knownBoard = false;
+let xScore = 0;
+let oScore = 0;
+let tieScore = 0;
 
 
 // FUNCTIONS
@@ -75,11 +78,30 @@ function checkForWin(){
   if (winner != ""){
     message.textContent = "winner is " + winner;
     if (winner == "o"){
-      currentState[xSelectedSquare]--;
+      document.getElementById("oScore").textContent = ("O Score: " + ++oScore);
+      rewardX(-1);
       if (currentState[xSelectedSquare] == -1){
         console.log(currentState);
         alert("ALERT");
       }
+    } else if (winner == "x"){
+      document.getElementById("xScore").textContent = ("X Score: " + ++xScore);
+      rewardX(10);
+    } else {
+      document.getElementById("TIEScore").textContent = ("TIES: " + ++tieScore);
+      rewardX(1);
+    }
+  }
+}
+
+function rewardX(reward){
+  let reserveFirst = false;
+  for (let board in boardSequence){
+    console.log(boardSequence[board]);
+    if (reward < 0 && !reserveFirst){
+      reserveFirst = true;
+    } else {
+      boardSequence[board][board] += reward;
     }
   }
 }
@@ -149,9 +171,9 @@ function fetchWeights(){
 }
 
 function newGame(){
-  for (let key in boardSequence){
-    console.log(key);
-    console.log(boardSequence[key]);
+  console.log("----------NEW GAME---------");
+  for (let key in boardStates){
+    console.log(boardStates[key]);
   }
   xTurn = true;
   winner = "";
