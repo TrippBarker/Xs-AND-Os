@@ -9,11 +9,13 @@ const resetButton = document.querySelector('#resetButton');
 let xTurn;
 let winner;
 let selectedSquare;
+let xSelectedSquare;
 let availableSquares = [];
 let weightedAvailableSquares = [];
 let boardTracker;
 let currentState;
 let boardStates = new Array();
+let boardSequence = new Array();
 let knownBoard = false;
 
 
@@ -21,17 +23,17 @@ let knownBoard = false;
 
 function userSquareSelection(){
   selectedSquare = this.id;
-  checkIfSquareEmpty();
+  checkIfSquareEmpty(selectedSquare);
   if (xTurn){
     randXMovement();
   }
 }
 
-function checkIfSquareEmpty(){
-  if (boardTracker[selectedSquare] == "" && winner == ""){
+function checkIfSquareEmpty(choosenSquare){
+  if (boardTracker[choosenSquare] == "" && winner == ""){
     counter++;
-    drawMove();
-    availableSquares.splice(availableSquares.indexOf(selectedSquare), 1);
+    drawMove(choosenSquare);
+    availableSquares.splice(availableSquares.indexOf(choosenSquare), 1);
     if (counter == 9){
       winner = "TIE";
     }
@@ -39,7 +41,7 @@ function checkIfSquareEmpty(){
   }
 }
 
-function drawMove(){
+function drawMove(choosenSquare){
   let mark = "x";
   if (!xTurn){
     mark = "o";
@@ -47,9 +49,9 @@ function drawMove(){
   } else {
     xTurn = false;
   }
-  boardTracker[selectedSquare] = mark;
-  document.getElementById(selectedSquare).classList.add("drawXO");
-  document.getElementById(selectedSquare).style.backgroundImage = "url(./resources/"+mark+"s/"+mark+(Math.floor(Math.random() * 10) + 1)+".png)";
+  boardTracker[choosenSquare] = mark;
+  document.getElementById(choosenSquare).classList.add("drawXO");
+  document.getElementById(choosenSquare).style.backgroundImage = "url(./resources/"+mark+"s/"+mark+(Math.floor(Math.random() * 10) + 1)+".png)";
 }
 
 function checkForWin(){
@@ -72,6 +74,13 @@ function checkForWin(){
   }
   if (winner != ""){
     message.textContent = "winner is " + winner;
+    if (winner == "o"){
+      currentState[xSelectedSquare]--;
+      if (currentState[xSelectedSquare] == -1){
+        console.log(currentState);
+        alert("ALERT");
+      }
+    }
   }
 }
 
@@ -99,10 +108,9 @@ function randXMovement(){
   if (!knownBoard){
     recordNewBoardState();
   }
-  console.log(currentState);
   fetchWeights();
-  selectedSquare = weightedAvailableSquares[Math.floor(Math.random() * weightedAvailableSquares.length)];
-  checkIfSquareEmpty();
+  xSelectedSquare = weightedAvailableSquares[Math.floor(Math.random() * weightedAvailableSquares.length)];
+  checkIfSquareEmpty(xSelectedSquare);
   knownBoard = false;
 }
 
@@ -130,9 +138,6 @@ function assignGridPos(square){
 
 function fetchWeights(){
   weightedAvailableSquares = [];
-  console.log("---");
-  console.log(weightedAvailableSquares);
-  console.log("---");
   for (let key in currentState){
     if (typeof currentState[key] == 'number'){
       for (let i = 0; i < currentState[key]; i++){
@@ -140,7 +145,6 @@ function fetchWeights(){
       }
     }
   }
-  console.log(weightedAvailableSquares);
 }
 
 function newGame(){
