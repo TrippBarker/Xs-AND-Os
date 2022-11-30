@@ -15,7 +15,7 @@ let weightedAvailableSquares = [];
 let boardTracker;
 let currentState;
 let boardStates = new Array();
-let boardSequence = new Array();
+let boardSequence = {};
 let knownBoard = false;
 
 
@@ -110,6 +110,7 @@ function randXMovement(){
   }
   fetchWeights();
   xSelectedSquare = weightedAvailableSquares[Math.floor(Math.random() * weightedAvailableSquares.length)];
+  boardSequence[xSelectedSquare] = currentState;
   checkIfSquareEmpty(xSelectedSquare);
   knownBoard = false;
 }
@@ -148,10 +149,15 @@ function fetchWeights(){
 }
 
 function newGame(){
+  for (let key in boardSequence){
+    console.log(key);
+    console.log(boardSequence[key]);
+  }
   xTurn = true;
   winner = "";
   counter = 0;
   selectedSquare = "";
+  boardSequence = {};
   availableSquares = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"];
   boardTracker = {a1: "", a2: "", a3: "", b1: "", b2: "", b3: "", c1: "", c2: "", c3: ""}
   squares.forEach(square => square.style.backgroundImage="none");
