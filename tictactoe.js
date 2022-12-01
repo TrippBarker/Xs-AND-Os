@@ -15,7 +15,7 @@ let availableSquares = [];
 let weightedAvailableSquares = [];
 let boardTracker;
 let currentState;
-let boardStates = new Array();
+let boardStates = [{a1: 0, a2: 1, a3: 1, b1: 0, b2: 1, b3: 0, c1: 0, c2: 0, c3: 0}];
 let boardSequence = {};
 let knownBoard = false;
 let xScore = 0;
