@@ -113,6 +113,24 @@ function rewardX(reward){
   }
 }
 
+function exportCSV(){
+  let csvCont = "data:text/csv;charset=utf-8,";
+  csvCont += "a1,a2,a3,b1,b2,b3,c1,c2,c3\n";
+  for (let board in boardStates){
+    for (let key in boardStates[board]){
+      csvCont += boardStates[board][key] + ",";
+    }
+    csvCont += "\n";
+  }
+  let encodedUri = encodeURI(csvCont);
+  window.open(encodedUri);
+}
+
+function importTrainedData(){
+  let importedCSV = 2;
+  console.log(importedCSV);
+}
+
 // Called to have X make a move
 function randXMovement(){
   for (let board in boardStates){
