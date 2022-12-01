@@ -29,7 +29,7 @@ textarea{
   align-items: center;
 }
 
-#playButton, #resetButton{
+#playButton, #resetButton, .turboButt{
   border: 1px solid black;
   padding: 3px 12px;
   border-radius: 3px;
@@ -37,12 +37,12 @@ textarea{
   font-weight: bolder;
 }
 
-#playButton:hover, #resetButton:hover{
+#playButton:hover, #resetButton:hover, .turboButt:hover{
   background-color: green;
   cursor: pointer;
 }
 
-#playButton:active, #resetButton:active{
+#playButton:active, #resetButton:active, .turboButt:active{
   background-color: red;
 }
 
@@ -118,6 +118,27 @@ textarea{
   text-align: center;
   font-size: 30px;
   border: none;
+}
+
+#turbotrain{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#turboButts{
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.turboButt{
+  margin: 10px;
+  text-align: center;
+  border: 1px solid black;
+  height: 50px;
+  width: 42px;
 }
 
 .flex{

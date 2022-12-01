@@ -3,6 +3,7 @@ const squares = document.querySelectorAll('.square');
 const message = document.querySelector('#winnerMessage');
 const playButton = document.querySelector('#playButton');
 const resetButton = document.querySelector('#resetButton');
+const turboButts = document.querySelectorAll('.turboButt');
 
 // Variables
 
@@ -20,7 +21,10 @@ let knownBoard = false;
 let xScore = 0;
 let oScore = 0;
 let tieScore = 0;
-
+let turboCounter = 0;
+let randWeight = 0;
+let totalWeight = 0;
+let weightedSquares = {};
 
 // FUNCTIONS
 
@@ -91,13 +95,16 @@ function checkForWin(){
       document.getElementById("TIEScore").textContent = ("TIES: " + ++tieScore);
       rewardX(1);
     }
+    if (turboCounter > 0){
+      turboCounter--;
+      newGame();
+    }
   }
 }
 
 function rewardX(reward){
   let reserveFirst = false;
   for (let board in boardSequence){
-    console.log(boardSequence[board]);
     if (reward < 0 && !reserveFirst){
       reserveFirst = true;
     } else {
@@ -131,10 +138,14 @@ function randXMovement(){
     recordNewBoardState();
   }
   fetchWeights();
-  xSelectedSquare = weightedAvailableSquares[Math.floor(Math.random() * weightedAvailableSquares.length)];
+  //xSelectedSquare = weightedAvailableSquares[Math.floor(Math.random() * weightedAvailableSquares.length)];
+  xSelectedSquare = fecthWeightedSquare();
   boardSequence[xSelectedSquare] = currentState;
   checkIfSquareEmpty(xSelectedSquare);
   knownBoard = false;
+  if (turboCounter > 0){
+    turboTrainDumb();
+  }
 }
 
 function recordNewBoardState(){
@@ -159,6 +170,24 @@ function assignGridPos(square){
   square.style.gridArea = square.id;
 }
 
+function fecthWeightedSquare(){
+  totalWeight = 0;
+  weightedSquares = [];
+  for (let key in currentState){
+    if (typeof currentState[key] == 'number'){
+      totalWeight += currentState[key];
+      weightedSquares[key] = totalWeight;
+    }
+  }
+  randWeight = Math.floor(Math.random() * totalWeight + 1);
+  for (let weightedSquare in weightedSquares){
+    if (randWeight <= weightedSquares[weightedSquare]){
+      return weightedSquare;
+    }
+  }
+}
+
+
 function fetchWeights(){
   weightedAvailableSquares = [];
   for (let key in currentState){
@@ -170,11 +199,16 @@ function fetchWeights(){
   }
 }
 
-function newGame(){
-  console.log("----------NEW GAME---------");
-  for (let key in boardStates){
-    console.log(boardStates[key]);
+function turboTrainDumb(){
+  selectedSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
+  //selectedSquare = fecthWeightedSquare();
+  checkIfSquareEmpty(selectedSquare);
+  if (xTurn){
+    randXMovement();
   }
+}
+
+function newGame(){
   xTurn = true;
   winner = "";
   counter = 0;
@@ -187,8 +221,14 @@ function newGame(){
   randXMovement();
 }
 
+function startTurbo(){
+  turboCounter = this.textContent;
+  newGame();
+}
+
 // EVENT LISTENERS
 squares.forEach(square => assignGridPos(square));
 squares.forEach(button => button.addEventListener('click', userSquareSelection));
 playButton.addEventListener('click', toggleStartMenu);
 resetButton.addEventListener('click', newGame);
+turboButts.forEach(butt => butt.addEventListener('click', startTurbo));
